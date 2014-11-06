@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lab08;
+
+import java.util.Scanner;
 
 
 /**
@@ -21,10 +19,48 @@ class HealthRecord{
     private double weight;
     private double height;
     
-    public HealthRecord(){
-        
-        
+    public HealthRecord(int initialSSN, String initialFirstName, String initialLastName,
+            int initialAge, long initialPhoneNumber, String initialEmail, double initialWeight,
+            double initialHeight){
+        set (initialSSN, initialFirstName, initialLastName, initialAge, 
+                initialPhoneNumber, initialEmail, initialWeight, initialHeight);               
     }
+    
+    public void readInputs(){
+        
+        System.out.println();
+        System.out.println("Health Records Dept:");
+        System.out.println("\nPlease Enter Patient Data");
+        System.out.println();
+        
+        Scanner console = new Scanner (System.in);
+        
+        System.out.print("\tEnter social security number (SSN): ");
+        ssn = console.nextInt();
+        
+        System.out.print("\tEnter first name: ");
+        firstName = console.next();
+        
+        System.out.print("\tEnter last name: ");
+        lastName = console.next();
+        
+        System.out.print("\tEnter age: ");
+        age = console.nextInt();
+        
+        System.out.print("\tEnter phone number (e.g., 2152049999): ");
+        phoneNumber = console.nextLong();
+        
+        System.out.print("\tEnter email (e.g., ajaj@temple.edu): ");
+        email = console.next();
+        
+        System.out.print("\tEnter weight: ");
+        weight = console.nextDouble();
+        
+        System.out.print("\tEnter height: ");
+        height = console.nextDouble();       
+                
+    }
+    
     
     private void set (int newSSN, String newFirstName, String newLastName,
             int newAge, long newPhoneNumber, String newEmail, double newWeight,
@@ -94,16 +130,29 @@ class HealthRecord{
     }
     
     public void calculateBMI (){
-        
-    }
+        System.out.println("BMI" + (weight / (height * height)) * 703);
+    }//end bmi
     
+    public void display(){
+        System.out.println("SSN" + ssn);
+        System.out.println("First Name" + firstName);
+        System.out.println("Last Name" + lastName);
+        System.out.println("Age" + age);
+        System.out.println("Phone Number" + phoneNumber);
+        System.out.println("Email" + email);
+        System.out.println("Weight" + weight);
+        System.out.println("Height" + height);
+    }//end display
 }
 
 
 public class HealthRecordDemo {
 
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        //HealthRecord patientJohn = new HealthRecord();
+        
+        
     }
     
 }
