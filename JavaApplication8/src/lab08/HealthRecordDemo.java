@@ -6,10 +6,17 @@ import java.util.Scanner;
 
 /**
  *
- * @author tud17229
+ * @author :    Danny Lee Matthew : tud17229 : 914463190
+ * @date   :    11-06-14
+ * @course :    CIS 1068 : 005
+ * @HW #   :    Lab 8 : HealthRecordDemo
+ * @Problem:    The user is going to enter basic health-care information of five patients. 
+ *              The program will then calculate the BMI and display the patients info.
+ * 
  */
 class HealthRecord{
     
+    /* Instance Variables Declarations */
     private int ssn;
     private String firstName;
     private String lastName;
@@ -19,13 +26,117 @@ class HealthRecord{
     private double weight;
     private double height;
     
+    /* Constructors */
+    
+    //[1] Full Entry 
     public HealthRecord(int initialSSN, String initialFirstName, String initialLastName,
             int initialAge, long initialPhoneNumber, String initialEmail, double initialWeight,
             double initialHeight){
-        set (initialSSN, initialFirstName, initialLastName, initialAge, 
+        
+        set(initialSSN, initialFirstName, initialLastName, initialAge, 
                 initialPhoneNumber, initialEmail, initialWeight, initialHeight);               
     }
     
+    //[2] Personal Info
+    public HealthRecord(int initialSSN, String initialFirstName, String initialLastName, int initialAge){
+        
+        set (initialSSN, initialFirstName, initialLastName, initialAge, 0, "No Email", 0, 0);        
+    }
+    //[3] Contact Info
+    public HealthRecord(String initialFirstName, String initialLastName, long initialPhoneNumber, String initialEmail){
+        set (0, initialFirstName, initialLastName, 0, initialPhoneNumber, initialEmail, 0, 0);
+    }
+    //[4] Physical Attributes
+    public HealthRecord(String initialFirstName, String initialLastName, double initialWeight, double initialHeight){        
+        set (0, initialFirstName, initialLastName, 0, 0, "No Email", initialWeight, initialHeight);
+    }
+    //[5] Default
+    public HealthRecord (){
+        
+    }
+    
+    /* Methods */
+    
+    //SETS!
+    private void set(int newSSN, String newFirstName, String newLastName,
+            int newAge, long newPhoneNumber, String newEmail, double newWeight,
+            double newHeight){
+        
+        //SSN
+        if (newSSN < 1 || newSSN > 999999999){
+            System.out.println("SSN is too Large or too Small");
+            System.exit(0);
+        }else{
+            ssn = newSSN;
+        }                    
+        firstName = newFirstName;
+        lastName = newLastName;        
+        //Age
+        if (newAge < 1 || newAge > 125){
+            System.out.println("Age is too Low or too Large");
+            System.exit(0);
+        }else{
+            age = newAge;
+        }        
+        //PhoneNumber
+        if (newPhoneNumber < 1L || newPhoneNumber > 9999999999L){
+            System.out.println("Phone Number is too Small or Large");
+            System.exit(0);
+        }else{
+            phoneNumber = newPhoneNumber;
+        }
+        //email
+        email = newEmail;
+        //weight
+        if (newWeight < 1 || newWeight > 1400){
+            System.out.println("Weight is too low or too high");
+            System.exit(0);
+        }else{
+            weight = newWeight;
+        }
+        //height
+        if (newHeight < 1 || newHeight > 108){
+            System.out.println("Height is too low or too high");
+            System.exit(0);
+        }else{
+            height = newHeight;
+        }        
+    } // end of set() method
+    
+    //GETS!
+    private int getSSN(){
+        return ssn;
+    }
+    private String getFirstName(){
+        return firstName;
+    }
+    private String getLastName(){
+        return lastName;
+    }
+    private int getAge(){
+        return age;
+    }
+    private long getPhoneNumber(){
+        return phoneNumber;
+    }
+    private String getEmail(){
+        return email;
+    }
+    private double getWeight(){
+        return weight;
+    }
+    private double getHeight(){
+        return height;
+    }
+    
+    //Calculate BMI
+    public void calculateBMI(){
+        System.out.println();
+        System.out.println("\t" + getFirstName() + " " +  getLastName()+ "'s BMI: " 
+                + (weight / (height*height)) * 703);              
+    }
+    
+    //Reading User-Inputs
     public void readInputs(){
         
         System.out.println();
@@ -57,92 +168,24 @@ class HealthRecord{
         weight = console.nextDouble();
         
         System.out.print("\tEnter height: ");
-        height = console.nextDouble();       
-                
+        height = console.nextDouble();     
     }
     
-    
-    private void set (int newSSN, String newFirstName, String newLastName,
-            int newAge, long newPhoneNumber, String newEmail, double newWeight,
-            double newHeight){
-        
-        //SSN
-        if (newSSN < 1 || newSSN > 999999999){
-            System.out.println("SSN is too Large or too Small");
-            System.exit(0);
-        }else{
-            ssn = newSSN;
-        }                    
-        firstName = newFirstName;
-        lastName = newLastName;        
-        //Age
-        if (newAge < 1 || newAge > 125){
-            System.out.println("Age is too Low or too Large");
-            System.exit(0);
-        }else{
-            age = newAge;
-        }        
-        //PhoneNumber
-        if (newPhoneNumber < 1L || newPhoneNumber > 9999999999L){
-            System.out.println("Phone Number is too Small or Large");            
-        }else{
-            phoneNumber = newPhoneNumber;
-        }
-        //email
-        email = newEmail;
-        //weight
-        if (newWeight < 1 || newWeight > 1400){
-            System.out.println("Weight is too low or too high");
-        }else{
-            weight = newWeight;
-        }
-        //height
-        if (newHeight < 1 || newHeight > 108){
-            System.out.println("Height is too low or too high");
-        }else{
-            height = newHeight;
-        }        
-    } // end of set() method
-    
-    private int getSSN (){
-        return ssn;
-    }
-    private String getFirstName(){
-        return firstName;
-    }
-    private String getLastName(){
-        return lastName;
-    }
-    private int getAge(){
-        return age;
-    }
-    private long getPhoneNumber(){
-        return phoneNumber;
-    }
-    private String getEmail(){
-        return email;
-    }
-    private double getWeight(){
-        return weight;
-    }
-    private double getHeight(){
-        return height;
-    }
-    
-    public void calculateBMI (){
-        System.out.println("BMI" + (weight / (height * height)) * 703);
-    }//end bmi
-    
+    //Display Patient Info
     public void display(){
-        System.out.println("SSN" + ssn);
-        System.out.println("First Name" + firstName);
-        System.out.println("Last Name" + lastName);
-        System.out.println("Age" + age);
-        System.out.println("Phone Number" + phoneNumber);
-        System.out.println("Email" + email);
-        System.out.println("Weight" + weight);
-        System.out.println("Height" + height);
-    }//end display
+            System.out.println();
+            System.out.println("Patient Entry: ");
+            System.out.println();
+            System.out.println("\tSSN: " + getSSN());
+            System.out.println("\tFirst Name: " + getFirstName());
+            System.out.println("\tLast Name: " + getLastName());
+            System.out.println("\tAge: " + getAge());
+            System.out.println("\tPhone Number: " + getPhoneNumber());
+            System.out.println("\tEmail: " + getEmail());
+            System.out.println("\tWeight: " + getWeight());
+            System.out.println("\tHeight: " + getHeight());
+            System.out.println();        
+        }
 }
 
 
@@ -150,8 +193,21 @@ public class HealthRecordDemo {
 
     public static void main(String[] args) {
         
-        //HealthRecord patientJohn = new HealthRecord();
+//        HealthRecord ER_patient = new HealthRecord();
+//        ER_patient.readInputs();
+//        ER_patient.calculateBMI();
+//        ER_patient.display();
+                       
+//        HealthRecord ICU_patient = new HealthRecord(155607279, "James", "Bond", 37, 2155557500L, "jbond@mi6.gov", 168, 72);
+        HealthRecord NEURO_patient = new HealthRecord(188704862, "Gregory", "House", 55);
+//        HealthRecord OR_patient = new HealthRecord("Jim", "Carey", 2156664444L, "jim.carrey@gmail.ca");
+//        HealthRecord MATERN_patient = new HealthRecord("Angelina", "Jolie", 115, 68);
         
+//        ICU_patient.display();
+        NEURO_patient.display();
+//        OR_patient.display();
+//        MATERN_patient.display();
+      
         
     }
     
